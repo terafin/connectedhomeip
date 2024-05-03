@@ -8580,6 +8580,9 @@
                   - endSystime
                   - minSystime
                   - maxSystime
+              HarmonicMeasurementStruct:
+                  - order
+                  - measurement
       enums:
           FanControl:
               - StepDirectionEnum
