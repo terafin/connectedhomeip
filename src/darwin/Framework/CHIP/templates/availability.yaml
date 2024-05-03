@@ -8566,10 +8566,8 @@
           FanControl:
               - StepDirectionEnum
               - AirflowDirectionEnum
-          PowerMode:
-              - Unknown
-              - DC
-              - AC
+          ElectricalPowerMeasurement:
+              - PowerModeEnum
       enum values:
           FanControl:
               StepDirectionEnum:
@@ -8578,6 +8576,11 @@
               AirflowDirectionEnum:
                   - Forward
                   - Reverse
+          ElecticalPowerMeasurement:
+              PowerModeEnum:
+                  - Unknown
+                  - DC
+                  - AC
       events:
           ElectricalPowerMeasurement:
               - MeasurementPeriodRanges
