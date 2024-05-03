@@ -1115,7 +1115,7 @@ MTR_NEWLY_AVAILABLE
 
 MTR_NEWLY_AVAILABLE
 @interface MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSArray * _Nonnull ranges MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull ranges MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_PROVISIONALLY_AVAILABLE
