@@ -8566,6 +8566,10 @@
           FanControl:
               - StepDirectionEnum
               - AirflowDirectionEnum
+          PowerMode:
+              - Unknown
+              - DC
+              - AC
       enum values:
           FanControl:
               StepDirectionEnum:
