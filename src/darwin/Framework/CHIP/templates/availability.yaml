@@ -8583,6 +8583,9 @@
               HarmonicMeasurementStruct:
                   - order
                   - measurement
+      events:
+          ElectricalPowerMeasurement:
+              - MeasurementPeriodRanges
       enums:
           FanControl:
               - StepDirectionEnum
@@ -8602,9 +8605,6 @@
                   - Unknown
                   - DC
                   - AC
-      events:
-          ElectricalPowerMeasurement:
-              - MeasurementPeriodRanges
       bitmap values:
           ElectricalPowerMeasurement:
               Feature:
