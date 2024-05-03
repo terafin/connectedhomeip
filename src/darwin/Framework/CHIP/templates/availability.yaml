@@ -8586,6 +8586,10 @@
       events:
           ElectricalPowerMeasurement:
               - MeasurementPeriodRanges
+      event fields:
+          ElectricalPowerMeasurement:
+              MeasurementPeriodRanges:
+                - list
       enums:
           FanControl:
               - StepDirectionEnum
