@@ -1100,17 +1100,17 @@ MTR_NEWLY_AVAILABLE
 
 MTR_NEWLY_AVAILABLE
 @interface MTRElectricalPowerMeasurementClusterMeasurementRangeStruct : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull measurementType MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull min MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull max MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable startTimestamp MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable endTimestamp MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable minTimestamp MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable maxTimestamp MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable startSystime MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable endSystime MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable minSystime MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable maxSystime MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull measurementType MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull min MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull max MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable endTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable minTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable maxTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startSystime MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable endSystime MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable minSystime MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable maxSystime MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
