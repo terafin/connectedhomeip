@@ -8555,6 +8555,13 @@
                   - Forward
                   - Reverse
       bitmap values:
+          ElectricalPowerMeasurement:
+              Feature:
+                  - DirectCurrent
+                  - AlternatingCurrent
+                  - PolyphasePower
+                  - Harmonics
+                  - PowerQuality
           FanControl:
               Feature:
                   - Step
