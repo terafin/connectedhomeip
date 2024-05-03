@@ -8562,6 +8562,10 @@
                   - direction
                   - wrap
                   - lowestOff
+      structs:
+          ElectricalPowerMeasurement:
+              - MeasurementRangeStruct
+              - HarmonicMeasurementStruct
       enums:
           FanControl:
               - StepDirectionEnum
@@ -8596,10 +8600,6 @@
               Feature:
                   - Step
                   - AirflowDirection
-      structs:
-          ElectricalPowerMeasurement:
-              - MeasurementRangeStruct
-              - HarmonicMeasurementStruct
   provisional:
       clusters:
           # Targeting Spring 2024 Matter release
