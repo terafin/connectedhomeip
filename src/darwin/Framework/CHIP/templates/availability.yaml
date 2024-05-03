@@ -8578,6 +8578,9 @@
               AirflowDirectionEnum:
                   - Forward
                   - Reverse
+      events:
+          ElectricalPowerMeasurement:
+              - MeasurementPeriodRanges
       bitmap values:
           ElectricalPowerMeasurement:
               Feature:
