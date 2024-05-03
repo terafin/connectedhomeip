@@ -8551,6 +8551,11 @@
               - HarmonicPhases
               - PowerFactor
               - NeutralCurrent
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
           FanControl:
               - AirflowDirection
       commands:
@@ -8589,7 +8594,7 @@
       event fields:
           ElectricalPowerMeasurement:
               MeasurementPeriodRanges:
-                - list
+                - ranges
       enums:
           FanControl:
               - StepDirectionEnum
