@@ -1094,8 +1094,8 @@ MTR_PROVISIONALLY_AVAILABLE
 
 MTR_NEWLY_AVAILABLE
 @interface MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull order MTR_PROVISIONALLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable measurement MTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull order MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable measurement MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
