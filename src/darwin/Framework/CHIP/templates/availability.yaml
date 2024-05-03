@@ -8590,6 +8590,10 @@
               Feature:
                   - Step
                   - AirflowDirection
+      structs:
+          ElectricalPowerMeasurement:
+              - MeasurementRangeStruct
+              - HarmonicMeasurementStruct
   provisional:
       clusters:
           # Targeting Spring 2024 Matter release
