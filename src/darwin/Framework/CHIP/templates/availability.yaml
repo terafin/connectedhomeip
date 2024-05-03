@@ -8566,6 +8566,20 @@
           ElectricalPowerMeasurement:
               - MeasurementRangeStruct
               - HarmonicMeasurementStruct
+      struct fields:
+          ElectricalPowerMeasurement:
+              MeasurementRangeStruct:
+                  - measurementType
+                  - min
+                  - max
+                  - startTimestamp
+                  - endTimestamp
+                  - minTimestamp
+                  - maxTimestamp
+                  - startSystime
+                  - endSystime
+                  - minSystime
+                  - maxSystime
       enums:
           FanControl:
               - StepDirectionEnum
