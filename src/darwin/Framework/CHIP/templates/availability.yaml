@@ -8529,6 +8529,26 @@
   versions: "future"
   introduced:
       attributes:
+          ElectricalPowerMeasurement:
+              - PowerMode
+              - NumberOfMeasurementTypes
+              - Accuracy
+              - Ranges
+              - Voltage
+              - ActiveCurrent
+              - ReactiveCurrent
+              - ApparentCurrent
+              - ActivePower
+              - ReactivePower
+              - ApparentPower
+              - RMSVoltage
+              - RMSCurrent
+              - RMSPower
+              - Frequency
+              - HarmonicCurrents
+              - HarmonicPhases
+              - PowerFactor
+              - NeutralCurrent
           FanControl:
               - AirflowDirection
       clusters:
