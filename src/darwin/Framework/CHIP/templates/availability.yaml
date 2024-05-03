@@ -8531,6 +8531,8 @@
       attributes:
           FanControl:
               - AirflowDirection
+      clusters:
+          - ElectricalPowerMeasurement
       commands:
           FanControl:
               - Step
@@ -8563,7 +8565,6 @@
           - EnergyEVSEMode
           - DeviceEnergyManagementMode
           - Messages
-          - ElectricalPowerMeasurement
           - PowerTopology
       attributes:
           DoorLock:
