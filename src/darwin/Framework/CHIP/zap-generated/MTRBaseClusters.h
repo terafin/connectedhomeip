@@ -17760,7 +17760,7 @@ typedef NS_ENUM(uint8_t, MTRElectricalPowerMeasurementPowerMode) {
     MTRElectricalPowerMeasurementPowerModeUnknown MTR_PROVISIONALLY_AVAILABLE = 0x00,
     MTRElectricalPowerMeasurementPowerModeDC MTR_PROVISIONALLY_AVAILABLE = 0x01,
     MTRElectricalPowerMeasurementPowerModeAC MTR_PROVISIONALLY_AVAILABLE = 0x02,
-} MTR_PROVISIONALLY_AVAILABLE;
+} MTR_NEWLY_AVAILABLE;
 
 typedef NS_OPTIONS(uint32_t, MTRElectricalPowerMeasurementFeature) {
     MTRElectricalPowerMeasurementFeatureDirectCurrent MTR_NEWLY_AVAILABLE = 0x1,
