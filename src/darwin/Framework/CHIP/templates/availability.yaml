@@ -8532,6 +8532,8 @@
           - RadonConcentrationMeasurement
           - TotalVolatileOrganicCompoundsConcentrationMeasurement
           - ValveConfigurationAndControl
+          - MicrowaveOvenControl
+          - MicrowaveOvenMode
       attributes:
           ActivatedCarbonFilterMonitoring:
               - Condition
@@ -8823,6 +8825,30 @@
               - AttributeList
               - FeatureMap
               - ClusterRevision
+          MicrowaveOvenControl:
+              - CookTime
+              - MaxCookTime
+              - PowerSetting
+              - MinPower
+              - MaxPower
+              - PowerStep
+              # SupportedWatts and SelectedWattIndex are Provisional in Matter 1.3
+              - WattRating
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
+          MicrowaveOvenMode:
+              - SupportedModes
+              - CurrentMode
+              - StartUpMode
+              - OnMode
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
       commands:
           BooleanStateConfiguration:
               - SuppressAlarm
@@ -8838,6 +8864,12 @@
           ValveConfigurationAndControl:
               - Open
               - Close
+          MicrowaveOvenControl:
+              - SetCookingParameters
+              - AddMoreTime
+          MicrowaveOvenMode:
+              - ChangeToMode
+              - ChangeToModeResponse
       command fields:
           BooleanStateConfiguration:
               SuppressAlarm:
@@ -8853,6 +8885,15 @@
               Open:
                   - openDuration
                   - targetLevel
+          MicrowaveOvenControl:
+              SetCookingParameters:
+                  - cookMode
+                  - cookTime
+                  - powerSetting
+                  # wattSettingIndex is provisional because WATTS is provisional in Matter 1.3
+                  - startAfterSetting
+              AddMoreTime:
+                  - timeToAdd
       structs:
           ActivatedCarbonFilterMonitoring:
               - ReplacementProductStruct
@@ -8867,6 +8908,9 @@
               - MeasurementAccuracyStruct
           HEPAFilterMonitoring:
               - ReplacementProductStruct
+          MicrowaveOvenMode:
+              - ModeTagStruct
+              - ModeOptionStruct
       struct fields:
           ActivatedCarbonFilterMonitoring:
               ReplacementProductStruct:
@@ -8934,6 +8978,14 @@
               ReplacementProductStruct:
                   - productIdentifierType
                   - productIdentifierValue
+          MicrowaveOvenMode:
+              ModeTagStruct:
+                  - mfgCode
+                  - value
+              ModeOptionStruct:
+                  - label
+                  - mode
+                  - modeTags
       events:
           BooleanStateConfiguration:
               - AlarmsStateChanged
@@ -9059,6 +9111,8 @@
           ValveConfigurationAndControl:
               - ValveStateEnum
               - StatusCodeEnum
+          MicrowaveOvenMode:
+              - ModeTag
       enum values:
           ActivatedCarbonFilterMonitoring:
               DegradationDirectionEnum:
@@ -9363,6 +9417,10 @@
                   - Transitioning
               StatusCodeEnum:
                   - FailureDueToFault
+          MicrowaveOvenMode:
+              ModeTag:
+                  - Normal
+                  - Defrost
       bitmaps:
           ActivatedCarbonFilterMonitoring:
               - Feature
@@ -9403,6 +9461,10 @@
           ValveConfigurationAndControl:
               - Feature
               - ValveFaultBitmap
+          MicrowaveOvenControl:
+              - Feature
+          MicrowaveOvenMode:
+              - Feature
       bitmap values:
           ActivatedCarbonFilterMonitoring:
               Feature:
@@ -9543,6 +9605,14 @@
                   - NotConnected
                   - ShortCircuit
                   - CurrentExceeded
+          MicrowaveOvenControl:
+              Feature:
+                  - PowerAsNumber
+                  # PowerInWatts is provisional in Matter 1.3
+                  - PowerNumberLimits
+          MicrowaveOvenMode:
+              Feature:
+                  - OnOff
   provisional:
       clusters:
           # Targeting Spring 2024 Matter release
@@ -9585,6 +9655,9 @@
               # Ideally none of UnitTesting would be exposed as public API, but
               # for now just start doing that for new additions to it.
               - MeiInt8u
+          MicrowaveOvenControl:
+              - SupportedWatts
+              - SelectedWattIndex
       commands:
           DoorLock:
               # Aliro is not ready yet.
@@ -9611,6 +9684,10 @@
               # Targeting Spring 2024 Matter release
               - PayloadTestRequest
               - PayloadTestResponse
+      command fields:
+          MicrowaveOvenControl:
+              SetCookingParameters:
+                  - wattSettingIndex
       structs:
           Thermostat:
               # Targeting Spring 2024 Matter release
@@ -9680,3 +9757,6 @@
                   # Not really part of the spec, need to think about whether to
                   # expose this.
                   - NoFeatures
+          MicrowaveOvenControl:
+              Feature:
+                  - PowerInWatts
