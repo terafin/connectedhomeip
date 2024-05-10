@@ -8534,6 +8534,8 @@
           - ValveConfigurationAndControl
           - MicrowaveOvenControl
           - MicrowaveOvenMode
+          - OvenMode
+          - OvenCavityOperationalState
       attributes:
           ActivatedCarbonFilterMonitoring:
               - Condition
@@ -8849,6 +8851,28 @@
               - AttributeList
               - FeatureMap
               - ClusterRevision
+          OvenMode:
+              - SupportedModes
+              - CurrentMode
+              - StartUpMode
+              - OnMode
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
+          OvenCavityOperationalState:
+              - PhaseList
+              - CurrentPhase
+              - CountdownTime
+              - OperationalStateList
+              - OperationalState
+              - OperationalError
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
       commands:
           BooleanStateConfiguration:
               - SuppressAlarm
@@ -8870,6 +8894,15 @@
           MicrowaveOvenMode:
               - ChangeToMode
               - ChangeToModeResponse
+          OvenMode:
+              - ChangeToMode
+              - ChangeToModeResponse
+          OvenCavityOperationalState:
+              - Pause
+              - Stop
+              - Start
+              - Resume
+              - OperationalCommandResponse
       command fields:
           BooleanStateConfiguration:
               SuppressAlarm:
@@ -8894,6 +8927,15 @@
                   - startAfterSetting
               AddMoreTime:
                   - timeToAdd
+          OvenMode:
+              ChangeToMode:
+                  - newMode
+              ChangeToModeResponse:
+                  - status
+                  - statusText
+          OvenCavityOperationalState:
+              OperationalCommandResponse:
+                  - commandResponseState
       structs:
           ActivatedCarbonFilterMonitoring:
               - ReplacementProductStruct
@@ -8911,6 +8953,12 @@
           MicrowaveOvenMode:
               - ModeTagStruct
               - ModeOptionStruct
+          OvenMode:
+              - ModeTagStruct
+              - ModeOptionStruct
+          OvenCavityOperationalState:
+              - ErrorStateStruct
+              - OperationalStateStruct
       struct fields:
           ActivatedCarbonFilterMonitoring:
               ReplacementProductStruct:
@@ -8986,6 +9034,22 @@
                   - label
                   - mode
                   - modeTags
+          OvenMode:
+              ModeTagStruct:
+                  - mfgCode
+                  - value
+              ModeOptionStruct:
+                  - label
+                  - mode
+                  - modeTags
+          OvenCavityOperationalState:
+              ErrorStateStruct:
+                  - errorStateID
+                  - errorStateLabel
+                  - errorStateDetails
+              OperationalStateStruct:
+                  - operationalStateID
+                  - operationalStateLabel
       events:
           BooleanStateConfiguration:
               - AlarmsStateChanged
@@ -9010,6 +9074,9 @@
           ValveConfigurationAndControl:
               - ValveStateChanged
               - ValveFault
+          OvenCavityOperationalState:
+              - OperationalError
+              - OperationCompletion
       event fields:
           BooleanStateConfiguration:
               AlarmsStateChanged:
@@ -9044,6 +9111,13 @@
                   - valveLevel
               ValveFault:
                   - valveFault
+          OvenCavityOperationalState:
+              OperationalError:
+                  - errorState
+              OperationCompletion:
+                  - completionErrorCode
+                  - totalOperationalTime
+                  - pausedTime
       enums:
           ActivatedCarbonFilterMonitoring:
               - DegradationDirectionEnum
@@ -9113,6 +9187,11 @@
               - StatusCodeEnum
           MicrowaveOvenMode:
               - ModeTag
+          OvenMode:
+              - ModeTag
+          OvenCavityOperationalState:
+              - ErrorStateEnum
+              - OperationalStateEnum
       enum values:
           ActivatedCarbonFilterMonitoring:
               DegradationDirectionEnum:
@@ -9421,6 +9500,29 @@
               ModeTag:
                   - Normal
                   - Defrost
+          OvenMode:
+              ModeTag:
+                  - Bake
+                  - Convection
+                  - Grill
+                  - Roast
+                  - Clean
+                  - ConvectionBake
+                  - ConvectionRoast
+                  - Warming
+                  - Proofing
+                  - Steam
+          OvenCavityOperationalState:
+              ErrorStateEnum:
+                  - NoError
+                  - UnableToStartOrResume
+                  - UnableToCompleteOperation
+                  - CommandInvalidInState
+              OperationalStateEnum:
+                  - Stopped
+                  - Running
+                  - Paused
+                  - Error
       bitmaps:
           ActivatedCarbonFilterMonitoring:
               - Feature
@@ -9464,6 +9566,8 @@
           MicrowaveOvenControl:
               - Feature
           MicrowaveOvenMode:
+              - Feature
+          OvenMode:
               - Feature
       bitmap values:
           ActivatedCarbonFilterMonitoring:
@@ -9611,6 +9715,9 @@
                   # PowerInWatts is provisional in Matter 1.3
                   - PowerNumberLimits
           MicrowaveOvenMode:
+              Feature:
+                  - OnOff
+          OvenMode:
               Feature:
                   - OnOff
   provisional:
