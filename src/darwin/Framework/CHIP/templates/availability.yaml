@@ -8536,6 +8536,7 @@
           - MicrowaveOvenMode
           - OvenMode
           - OvenCavityOperationalState
+          - LaundryDryerControls
       attributes:
           ActivatedCarbonFilterMonitoring:
               - Condition
@@ -8873,6 +8874,14 @@
               - AttributeList
               - FeatureMap
               - ClusterRevision
+          LaundryDryerControls:
+              - SupportedDrynessLevels
+              - SelectedDrynessLevel
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
       commands:
           BooleanStateConfiguration:
               - SuppressAlarm
@@ -9192,6 +9201,8 @@
           OvenCavityOperationalState:
               - ErrorStateEnum
               - OperationalStateEnum
+          LaundryDryerControls:
+              - DrynessLevelEnum
       enum values:
           ActivatedCarbonFilterMonitoring:
               DegradationDirectionEnum:
@@ -9523,6 +9534,12 @@
                   - Running
                   - Paused
                   - Error
+          LaundryDryerControls:
+              DrynessLevelEnum:
+                  - Low
+                  - Normal
+                  - Extra
+                  - Max
       bitmaps:
           ActivatedCarbonFilterMonitoring:
               - Feature
