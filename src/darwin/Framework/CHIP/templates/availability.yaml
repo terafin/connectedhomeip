@@ -8536,10 +8536,6 @@
           - RadonConcentrationMeasurement
           - TotalVolatileOrganicCompoundsConcentrationMeasurement
           - ValveConfigurationAndControl
-          - MicrowaveOvenControl
-          - MicrowaveOvenMode
-          - OvenMode
-          - OvenCavityOperationalState
       attributes:
           ActivatedCarbonFilterMonitoring:
               - Condition
@@ -8831,52 +8827,6 @@
               - AttributeList
               - FeatureMap
               - ClusterRevision
-          MicrowaveOvenControl:
-              - CookTime
-              - MaxCookTime
-              - PowerSetting
-              - MinPower
-              - MaxPower
-              - PowerStep
-              # SupportedWatts and SelectedWattIndex are Provisional in Matter 1.3
-              - WattRating
-              - GeneratedCommandList
-              - AcceptedCommandList
-              - AttributeList
-              - FeatureMap
-              - ClusterRevision
-          MicrowaveOvenMode:
-              - SupportedModes
-              - CurrentMode
-              - StartUpMode
-              - OnMode
-              - GeneratedCommandList
-              - AcceptedCommandList
-              - AttributeList
-              - FeatureMap
-              - ClusterRevision
-          OvenMode:
-              - SupportedModes
-              - CurrentMode
-              - StartUpMode
-              - OnMode
-              - GeneratedCommandList
-              - AcceptedCommandList
-              - AttributeList
-              - FeatureMap
-              - ClusterRevision
-          OvenCavityOperationalState:
-              - PhaseList
-              - CurrentPhase
-              - CountdownTime
-              - OperationalStateList
-              - OperationalState
-              - OperationalError
-              - GeneratedCommandList
-              - AcceptedCommandList
-              - AttributeList
-              - FeatureMap
-              - ClusterRevision
       commands:
           BooleanStateConfiguration:
               - SuppressAlarm
@@ -8892,21 +8842,6 @@
           ValveConfigurationAndControl:
               - Open
               - Close
-          MicrowaveOvenControl:
-              - SetCookingParameters
-              - AddMoreTime
-          MicrowaveOvenMode:
-              - ChangeToMode
-              - ChangeToModeResponse
-          OvenMode:
-              - ChangeToMode
-              - ChangeToModeResponse
-          OvenCavityOperationalState:
-              - Pause
-              - Stop
-              - Start
-              - Resume
-              - OperationalCommandResponse
       command fields:
           BooleanStateConfiguration:
               SuppressAlarm:
@@ -8922,24 +8857,6 @@
               Open:
                   - openDuration
                   - targetLevel
-          MicrowaveOvenControl:
-              SetCookingParameters:
-                  - cookMode
-                  - cookTime
-                  - powerSetting
-                  # wattSettingIndex is provisional because WATTS is provisional in Matter 1.3
-                  - startAfterSetting
-              AddMoreTime:
-                  - timeToAdd
-          OvenMode:
-              ChangeToMode:
-                  - newMode
-              ChangeToModeResponse:
-                  - status
-                  - statusText
-          OvenCavityOperationalState:
-              OperationalCommandResponse:
-                  - commandResponseState
       structs:
           ActivatedCarbonFilterMonitoring:
               - ReplacementProductStruct
@@ -8954,15 +8871,6 @@
               - MeasurementAccuracyStruct
           HEPAFilterMonitoring:
               - ReplacementProductStruct
-          MicrowaveOvenMode:
-              - ModeTagStruct
-              - ModeOptionStruct
-          OvenMode:
-              - ModeTagStruct
-              - ModeOptionStruct
-          OvenCavityOperationalState:
-              - ErrorStateStruct
-              - OperationalStateStruct
       struct fields:
           ActivatedCarbonFilterMonitoring:
               ReplacementProductStruct:
@@ -9030,30 +8938,6 @@
               ReplacementProductStruct:
                   - productIdentifierType
                   - productIdentifierValue
-          MicrowaveOvenMode:
-              ModeTagStruct:
-                  - mfgCode
-                  - value
-              ModeOptionStruct:
-                  - label
-                  - mode
-                  - modeTags
-          OvenMode:
-              ModeTagStruct:
-                  - mfgCode
-                  - value
-              ModeOptionStruct:
-                  - label
-                  - mode
-                  - modeTags
-          OvenCavityOperationalState:
-              ErrorStateStruct:
-                  - errorStateID
-                  - errorStateLabel
-                  - errorStateDetails
-              OperationalStateStruct:
-                  - operationalStateID
-                  - operationalStateLabel
       events:
           BooleanStateConfiguration:
               - AlarmsStateChanged
@@ -9078,9 +8962,6 @@
           ValveConfigurationAndControl:
               - ValveStateChanged
               - ValveFault
-          OvenCavityOperationalState:
-              - OperationalError
-              - OperationCompletion
       event fields:
           BooleanStateConfiguration:
               AlarmsStateChanged:
@@ -9115,13 +8996,6 @@
                   - valveLevel
               ValveFault:
                   - valveFault
-          OvenCavityOperationalState:
-              OperationalError:
-                  - errorState
-              OperationCompletion:
-                  - completionErrorCode
-                  - totalOperationalTime
-                  - pausedTime
       enums:
           ActivatedCarbonFilterMonitoring:
               - DegradationDirectionEnum
@@ -9189,13 +9063,6 @@
           ValveConfigurationAndControl:
               - ValveStateEnum
               - StatusCodeEnum
-          MicrowaveOvenMode:
-              - ModeTag
-          OvenMode:
-              - ModeTag
-          OvenCavityOperationalState:
-              - ErrorStateEnum
-              - OperationalStateEnum
       enum values:
           ActivatedCarbonFilterMonitoring:
               DegradationDirectionEnum:
@@ -9500,33 +9367,6 @@
                   - Transitioning
               StatusCodeEnum:
                   - FailureDueToFault
-          MicrowaveOvenMode:
-              ModeTag:
-                  - Normal
-                  - Defrost
-          OvenMode:
-              ModeTag:
-                  - Bake
-                  - Convection
-                  - Grill
-                  - Roast
-                  - Clean
-                  - ConvectionBake
-                  - ConvectionRoast
-                  - Warming
-                  - Proofing
-                  - Steam
-          OvenCavityOperationalState:
-              ErrorStateEnum:
-                  - NoError
-                  - UnableToStartOrResume
-                  - UnableToCompleteOperation
-                  - CommandInvalidInState
-              OperationalStateEnum:
-                  - Stopped
-                  - Running
-                  - Paused
-                  - Error
       bitmaps:
           ActivatedCarbonFilterMonitoring:
               - Feature
@@ -9567,12 +9407,6 @@
           ValveConfigurationAndControl:
               - Feature
               - ValveFaultBitmap
-          MicrowaveOvenControl:
-              - Feature
-          MicrowaveOvenMode:
-              - Feature
-          OvenMode:
-              - Feature
       bitmap values:
           ActivatedCarbonFilterMonitoring:
               Feature:
@@ -9713,17 +9547,6 @@
                   - NotConnected
                   - ShortCircuit
                   - CurrentExceeded
-          MicrowaveOvenControl:
-              Feature:
-                  - PowerAsNumber
-                  # PowerInWatts is provisional in Matter 1.3
-                  - PowerNumberLimits
-          MicrowaveOvenMode:
-              Feature:
-                  - OnOff
-          OvenMode:
-              Feature:
-                  - OnOff
   provisional:
       clusters:
           # Targeting Spring 2024 Matter release
@@ -9766,9 +9589,6 @@
               # Ideally none of UnitTesting would be exposed as public API, but
               # for now just start doing that for new additions to it.
               - MeiInt8u
-          MicrowaveOvenControl:
-              - SupportedWatts
-              - SelectedWattIndex
       commands:
           DoorLock:
               # Aliro is not ready yet.
@@ -9795,10 +9615,6 @@
               # Targeting Spring 2024 Matter release
               - PayloadTestRequest
               - PayloadTestResponse
-      command fields:
-          MicrowaveOvenControl:
-              SetCookingParameters:
-                  - wattSettingIndex
       structs:
           Thermostat:
               # Targeting Spring 2024 Matter release
@@ -9868,8 +9684,217 @@
                   # Not really part of the spec, need to think about whether to
                   # expose this.
                   - NoFeatures
-          MicrowaveOvenControl:
-              Feature:
-                  - PowerInWatts
 - release: "Future"
   versions: "future"
+  introduced:
+      clusters:
+          - MicrowaveOvenControl
+          - MicrowaveOvenMode
+          - OvenMode
+          - OvenCavityOperationalState
+      attributes:
+          MicrowaveOvenControl:
+              - CookTime
+              - MaxCookTime
+              - PowerSetting
+              - MinPower
+              - MaxPower
+              - PowerStep
+              # SupportedWatts and SelectedWattIndex are Provisional because WATTS is Provisional in Matter 1.3
+              # WATTS is provisional in 1.3 because no one has submitted a DUT for it
+              - WattRating
+              - GeneratedCommandList
+              - AcceptedCommandList
+              - AttributeList
+              - FeatureMap
+              - ClusterRevision
+      MicrowaveOvenMode:
+          - SupportedModes
+          - CurrentMode
+          - StartUpMode
+          - OnMode
+          - GeneratedCommandList
+          - AcceptedCommandList
+          - AttributeList
+          - FeatureMap
+          - ClusterRevision
+      OvenMode:
+          - SupportedModes
+          - CurrentMode
+          - StartUpMode
+          - OnMode
+          - GeneratedCommandList
+          - AcceptedCommandList
+          - AttributeList
+          - FeatureMap
+          - ClusterRevision
+      OvenCavityOperationalState:
+          - PhaseList
+          - CurrentPhase
+          - CountdownTime
+          - OperationalStateList
+          - OperationalState
+          - OperationalError
+          - GeneratedCommandList
+          - AcceptedCommandList
+          - AttributeList
+          - FeatureMap
+          - ClusterRevision
+      commands:
+          MicrowaveOvenControl:
+              - SetCookingParameters
+              - AddMoreTime
+          MicrowaveOvenMode:
+              - ChangeToMode
+              - ChangeToModeResponse
+          OvenMode:
+              - ChangeToMode
+              - ChangeToModeResponse
+          OvenCavityOperationalState:
+              - Pause
+              - Stop
+              - Start
+              - Resume
+              - OperationalCommandResponse
+      command fields:
+          MicrowaveOvenControl:
+              SetCookingParameters:
+                  - cookMode
+                  - cookTime
+                  - powerSetting
+                  # wattSettingIndex is provisional because WATTS is provisional in Matter 1.3
+                  # WATTS is provisional in 1.3 because no one has submitted a DUT for it
+                  - startAfterSetting
+              AddMoreTime:
+                  - timeToAdd
+          OvenMode:
+              ChangeToMode:
+                  - newMode
+              ChangeToModeResponse:
+                  - status
+                  - statusText
+          OvenCavityOperationalState:
+              OperationalCommandResponse:
+                  - commandResponseState
+      structs:
+          MicrowaveOvenMode:
+              - ModeTagStruct
+              - ModeOptionStruct
+          OvenMode:
+              - ModeTagStruct
+              - ModeOptionStruct
+          OvenCavityOperationalState:
+              - ErrorStateStruct
+              - OperationalStateStruct
+      struct fields:
+          MicrowaveOvenMode:
+              ModeTagStruct:
+                  - mfgCode
+                  - value
+              ModeOptionStruct:
+                  - label
+                  - mode
+                  - modeTags
+          OvenMode:
+              ModeTagStruct:
+                  - mfgCode
+                  - value
+              ModeOptionStruct:
+                  - label
+                  - mode
+                  - modeTags
+          OvenCavityOperationalState:
+              ErrorStateStruct:
+                  - errorStateID
+                  - errorStateLabel
+                  - errorStateDetails
+              OperationalStateStruct:
+                  - operationalStateID
+                  - operationalStateLabel
+      events:
+          OvenCavityOperationalState:
+              - OperationalError
+              - OperationCompletion
+      event fields:
+          OvenCavityOperationalState:
+              OperationalError:
+                  - errorState
+              OperationCompletion:
+                  - completionErrorCode
+                  - totalOperationalTime
+                  - pausedTime
+      enums:
+          MicrowaveOvenMode:
+              - ModeTag
+          OvenMode:
+              - ModeTag
+          OvenCavityOperationalState:
+              - ErrorStateEnum
+              - OperationalStateEnum
+      enum values:
+          MicrowaveOvenMode:
+              ModeTag:
+                  - Normal
+                  - Defrost
+          OvenMode:
+              ModeTag:
+                  - Bake
+                  - Convection
+                  - Grill
+                  - Roast
+                  - Clean
+                  - ConvectionBake
+                  - ConvectionRoast
+                  - Warming
+                  - Proofing
+                  - Steam
+          OvenCavityOperationalState:
+              ErrorStateEnum:
+                  - NoError
+                  - UnableToStartOrResume
+                  - UnableToCompleteOperation
+                  - CommandInvalidInState
+              OperationalStateEnum:
+                  - Stopped
+                  - Running
+                  - Paused
+                  - Error
+      bitmaps:
+          MicrowaveOvenControl:
+              - Feature
+          MicrowaveOvenMode:
+              - Feature
+          OvenMode:
+              - Feature
+      bitmap values:
+          MicrowaveOvenControl:
+              Feature:
+                  - PowerAsNumber
+                  # PowerInWatts is provisional because WATTS is provisional in Matter 1.3
+                  # WATTS is provisional in 1.3 because no one has submitted a DUT for it
+                  - PowerNumberLimits
+          MicrowaveOvenMode:
+              Feature:
+                  - OnOff
+          OvenMode:
+              Feature:
+                  - OnOff
+  provisional:
+      attributes:
+          MicrowaveOvenControl:
+              # SupportedWatts and SelectedWattIndex are Provisional because WATTS is Provisional in Matter 1.3
+              # WATTS is Provisional in 1.3 because no one has submitted a DUT for it
+              - SupportedWatts
+              - SelectedWattIndex
+      command fields:
+          MicrowaveOvenControl:
+              SetCookingParameters:
+                  # wattSettingIndex is Provisional because WATTS is Provisional in Matter 1.3
+                  # WATTS is Provisional in 1.3 because no one has submitted a DUT for it
+                  - wattSettingIndex
+      bitmap values:
+          MicrowaveOvenControl:
+              Feature:
+                  # PowerInWatts is Provisional because WATTS is Provisional in Matter 1.3
+                  # WATTS is Provisional in 1.3 because no one has submitted a DUT for it
+                  - PowerInWatts
