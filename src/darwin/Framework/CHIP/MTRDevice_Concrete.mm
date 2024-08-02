@@ -54,6 +54,24 @@
 #import <platform/LockTracker.h>
 #import <platform/PlatformManager.h>
 
+
+// allow readwrite access to superclass properties
+@interface MTRDevice_Concrete ()
+
+@property (nonatomic, readwrite, copy) NSNumber * nodeID;
+@property (nonatomic, readwrite, nullable) MTRDeviceController * deviceController;
+@property (nonatomic, readwrite) MTRAsyncWorkQueue<MTRDevice *> * asyncWorkQueue;
+@property (nonatomic, readwrite) MTRDeviceState state;
+@property (nonatomic, readwrite, nullable) NSDate * estimatedStartTime;
+@property (nonatomic, readwrite, nullable, copy) NSNumber * estimatedSubscriptionLatency;
+
+// forward declaration
+- (MTRBaseDevice *)newBaseDevice;
+//
+
+@end
+
+
 typedef void (^MTRDeviceAttributeReportHandler)(NSArray * _Nonnull);
 
 NSString * const MTRPreviousDataKey = @"previousData";
@@ -366,7 +384,7 @@ static NSString * const sLastInitialSubscribeLatencyKey = @"lastInitialSubscribe
 // better behavior.
 #define MTRDEVICE_SUBSCRIPTION_LATENCY_NEW_VALUE_WEIGHT (1.0 / 3.0)
 
-@interface MTRDevice ()
+@interface MTRDevice_Concrete ()
 @property (nonatomic, readonly) os_unfair_lock lock; // protects the caches and device state
 // protects against concurrent time updates by guarding timeUpdateScheduled flag which manages time updates scheduling,
 // and protects device calls to setUTCTime and setDSTOffset
@@ -436,7 +454,8 @@ static NSString * const sLastInitialSubscribeLatencyKey = @"lastInitialSubscribe
 @end
 #endif
 
-@implementation MTRDevice {
+@implementation MTRDevice_Concrete {
+
 #ifdef DEBUG
     NSUInteger _unitTestAttributesReportedSinceLastCheck;
 #endif
@@ -498,6 +517,15 @@ static NSString * const sLastInitialSubscribeLatencyKey = @"lastInitialSubscribe
     NSMutableSet<MTRDeviceDelegateInfo *> * _delegates;
 }
 
+// synthesize superclass property readwrite accessors
+@synthesize nodeID = _nodeID;
+@synthesize deviceController = _deviceController;
+@synthesize queue = _queue;
+@synthesize asyncWorkQueue = _asyncWorkQueue;
+@synthesize state = _state;
+@synthesize estimatedStartTime = _estimatedStartTime;
+@synthesize estimatedSubscriptionLatency = _estimatedSubscriptionLatency;
+
 - (instancetype)initWithNodeID:(NSNumber *)nodeID controller:(MTRDeviceController *)controller
 {
     if (self = [super init]) {
@@ -543,13 +571,13 @@ static NSString * const sLastInitialSubscribeLatencyKey = @"lastInitialSubscribe
     [[NSNotificationCenter defaultCenter] removeObserver:_systemTimeChangeObserverToken];
 
     // TODO: retain cycle and clean up https://github.com/project-chip/connectedhomeip/issues/34267
-    MTR_LOG("MTRDevice dealloc: %p", self);
+    MTR_LOG("MTRDevice_Concrete dealloc: %p", self);
 }
 
 - (NSString *)description
 {
     return [NSString
-        stringWithFormat:@"<MTRDevice: %p>[fabric: %u, nodeID: 0x%016llX]", self, _fabricIndex, _nodeID.unsignedLongLongValue];
+        stringWithFormat:@"<MTRDevice_Concrete: %p>[fabric: %u, nodeID: 0x%016llX]", self, _fabricIndex, _nodeID.unsignedLongLongValue];
 }
 
 + (MTRDevice *)deviceWithNodeID:(NSNumber *)nodeID controller:(MTRDeviceController *)controller
@@ -624,7 +652,7 @@ static NSString * const sLastInitialSubscribeLatencyKey = @"lastInitialSubscribe
         if (self) {
             [self _performScheduledTimeUpdate];
         } else {
-            MTR_LOG_DEBUG("%@ MTRDevice no longer valid. No Timer Scheduled will be scheduled for a Device Time Update.", self);
+            MTR_LOG_DEBUG("%@ MTRDevice_Concrete no longer valid. No Timer Scheduled will be scheduled for a Device Time Update.", self);
             return;
         }
     });
@@ -4138,7 +4166,7 @@ static BOOL AttributeHasChangesOmittedQuality(MTRAttributePath * attributePath)
 
 /* BEGIN DRAGONS: Note methods here cannot be renamed, and are used by private callers, do not rename, remove or modify behavior here */
 
-@implementation MTRDevice (MatterPrivateForInternalDragonsDoNotFeed)
+@implementation MTRDevice_Concrete (MatterPrivateForInternalDragonsDoNotFeed)
 
 - (BOOL)_deviceHasActiveSubscription
 {
@@ -4162,7 +4190,7 @@ static BOOL AttributeHasChangesOmittedQuality(MTRAttributePath * attributePath)
 
 @end
 
-@implementation MTRDevice (Deprecated)
+@implementation MTRDevice_Concrete (Deprecated)
 
 + (MTRDevice *)deviceWithNodeID:(uint64_t)nodeID deviceController:(MTRDeviceController *)deviceController
 {

@@ -38,6 +38,7 @@
 #import <Matter/MTRCommissioningParameters.h>
 #import <Matter/MTRDefines.h>
 #import <Matter/MTRDevice.h>
+#import <Matter/MTRDevice_Concrete.h>
 #import <Matter/MTRDeviceAttestationDelegate.h>
 #import <Matter/MTRDeviceAttestationInfo.h>
 #import <Matter/MTRDeviceController+XPC.h>

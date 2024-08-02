@@ -33,8 +33,9 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
 
 MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface MTRDevice : NSObject
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+// TODO:  implement and error? kmo 2 aug 2024 14h16
+//- (instancetype)init NS_UNAVAILABLE;
+//+ (instancetype)new NS_UNAVAILABLE;
 
 /**
  * TODO: Document usage better
