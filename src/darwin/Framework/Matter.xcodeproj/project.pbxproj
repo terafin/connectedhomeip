@@ -304,7 +304,7 @@
 		99D466E12798936D0089A18F /* MTRCommissioningParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 99D466E02798936D0089A18F /* MTRCommissioningParameters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BC064942C6BCB6F00996FEF /* MTRXPCService.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC064922C6BCB6F00996FEF /* MTRXPCService.h */; };
 		9BC064952C6BCB6F00996FEF /* MTRXPCService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BC064932C6BCB6F00996FEF /* MTRXPCService.mm */; };
-		9BC064972C6BCBAE00996FEF /* MTRXPCServiceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC064962C6BCBAE00996FEF /* MTRXPCServiceProtocol.h */; };
+		9BC064972C6BCBAE00996FEF /* MTRXPCServiceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC064962C6BCBAE00996FEF /* MTRXPCServiceProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9BC064992C6BCEA000996FEF /* MTRXPCServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC064982C6BCEA000996FEF /* MTRXPCServiceTests.m */; };
 		9BDA2A062C5D9AF800A32BDD /* MTRDevice_Concrete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA2A052C5D9AF800A32BDD /* MTRDevice_Concrete.mm */; };
 		9BDA2A082C5D9AFB00A32BDD /* MTRDevice_Concrete.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BDA2A072C5D9AFB00A32BDD /* MTRDevice_Concrete.h */; };
