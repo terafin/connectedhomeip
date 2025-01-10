@@ -34,6 +34,7 @@
 #include <credentials/DeviceAttestationCredsProvider.h>
 #include <credentials/examples/DeviceAttestationCredsExample.h>
 #include <cy_wcm.h>
+#include <data-model-providers/codegen/Instance.h>
 #include <platform/CHIPDeviceLayer.h>
 #include <setup_payload/QRCodeSetupPayloadGenerator.h>
 #include <setup_payload/SetupPayload.h>
@@ -41,6 +42,7 @@
 #include <DeviceInfoProviderImpl.h>
 #include <app/clusters/network-commissioning/network-commissioning.h>
 #include <platform/Infineon/PSOC6/NetworkCommissioningDriver.h>
+#include <static-supported-modes-manager.h>
 #include <static-supported-temperature-levels.h>
 
 /* OTA related includes */
@@ -98,6 +100,7 @@ OTAImageProcessorImpl gImageProcessor;
 #endif
 
 chip::app::Clusters::TemperatureControl::AppSupportedTemperatureLevelsDelegate sAppSupportedTemperatureLevelsDelegate;
+chip::app::Clusters::ModeSelect::StaticSupportedModesManager sStaticSupportedModesManager;
 } // namespace
 
 using namespace ::chip;
@@ -127,6 +130,7 @@ static void InitServer(intptr_t context)
     // Init ZCL Data Model
     static chip::CommonCaseDeviceServerInitParams initParams;
     (void) initParams.InitializeStaticResourcesBeforeServerInit();
+    initParams.dataModelProvider = app::CodegenDataModelProviderInstance(initParams.persistentStorageDelegate);
     chip::Server::GetInstance().Init(initParams);
 
     // We only have network commissioning on endpoint 0.
@@ -141,6 +145,7 @@ static void InitServer(intptr_t context)
     GetAppTask().InitOTARequestor();
 #endif
     chip::app::Clusters::TemperatureControl::SetInstance(&sAppSupportedTemperatureLevelsDelegate);
+    chip::app::Clusters::ModeSelect::setSupportedModesManager(&sStaticSupportedModesManager);
 }
 
 CHIP_ERROR AppTask::StartAppTask()

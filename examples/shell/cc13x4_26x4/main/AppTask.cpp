@@ -24,6 +24,7 @@
 
 #include <app/server/OnboardingCodesUtil.h>
 #include <credentials/DeviceAttestationCredsProvider.h>
+#include <data-model-providers/codegen/Instance.h>
 #include <examples/platform/cc13x4_26x4/CC13X4_26X4DeviceAttestationCreds.h>
 #include <lib/support/ThreadOperationalDataset.h>
 #include <platform/CHIPDeviceLayer.h>
@@ -41,6 +42,7 @@
 #include <lib/support/CHIPPlatformMemory.h>
 
 #include <app/server/OnboardingCodesUtil.h>
+#include <static-supported-modes-manager.h>
 
 /* syscfg */
 #include <ti_drivers_config.h>
@@ -54,6 +56,7 @@ using namespace ::chip::DeviceLayer;
 using chip::Shell::Engine;
 
 AppTask AppTask::sAppTask;
+Clusters::ModeSelect::StaticSupportedModesManager sStaticSupportedModesManager;
 
 static TaskHandle_t sAppTaskHandle;
 
@@ -159,6 +162,7 @@ CHIP_ERROR AppTask::Init()
     // Init ZCL Data Model and start server
     static chip::CommonCaseDeviceServerInitParams initParams;
     (void) initParams.InitializeStaticResourcesBeforeServerInit();
+    initParams.dataModelProvider = app::CodegenDataModelProviderInstance(initParams.persistentStorageDelegate);
     chip::Server::GetInstance().Init(initParams);
 
     ret = PlatformMgr().StartEventLoopTask();
@@ -171,6 +175,7 @@ CHIP_ERROR AppTask::Init()
 #if CHIP_DEVICE_CONFIG_ENABLE_OTA_REQUESTOR
     InitializeOTARequestor();
 #endif
+    Clusters::ModeSelect::setSupportedModesManager(&sStaticSupportedModesManager);
     return err;
 }
 

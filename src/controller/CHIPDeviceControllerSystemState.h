@@ -71,6 +71,10 @@ inline constexpr size_t kMaxDeviceTransportTcpPendingPackets = CHIP_CONFIG_MAX_T
 
 using DeviceTransportMgr =
     TransportMgr<Transport::UDP /* IPv6 */
+#if INET_CONFIG_ENABLE_TCP_ENDPOINT
+                 ,
+                 Transport::TCP<kMaxDeviceTransportTcpActiveConnectionCount, kMaxDeviceTransportTcpPendingPackets>
+#endif
 #if INET_CONFIG_ENABLE_IPV4
                  ,
                  Transport::UDP /* IPv4 */
@@ -78,10 +82,6 @@ using DeviceTransportMgr =
 #if CONFIG_NETWORK_LAYER_BLE
                  ,
                  Transport::BLE<kMaxDeviceTransportBlePendingPackets> /* BLE */
-#endif
-#if INET_CONFIG_ENABLE_TCP_ENDPOINT
-                 ,
-                 Transport::TCP<kMaxDeviceTransportTcpActiveConnectionCount, kMaxDeviceTransportTcpPendingPackets>
 #endif
 #if CHIP_DEVICE_CONFIG_ENABLE_WIFIPAF
                  ,
@@ -201,7 +201,7 @@ public:
     //
     // The stack will shut down when all references are released.
     //
-    // NB: The system state is owned by the factory; Relase() will not free it
+    // NB: The system state is owned by the factory; Release() will not free it
     // but will free its members (Shutdown()).
     //
     // Returns true if the system state was shut down in response to this call.
